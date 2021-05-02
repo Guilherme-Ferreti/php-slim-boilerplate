@@ -1,0 +1,11 @@
+vendor/
+
+node_modules/
+
+.vscode/
+
+cache/*
+
+logs/*
+
+app/Cryptography/keys/*
