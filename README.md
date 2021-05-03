@@ -22,6 +22,9 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore optio numquam
 
 ```php app/Helpers/generate-encryption-keys.php```
 
+• Remove dev dependencies and optimize composer's autoloader (Only for deployment):
+```composer install --no-dev --optimize-autoloader```
+
 ## Project documentation
 
 The documentation can be found here: https://github.com/docshere
