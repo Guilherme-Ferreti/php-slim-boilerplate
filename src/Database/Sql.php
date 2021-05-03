@@ -16,18 +16,18 @@ class Sql
 
     public function __construct()
     {
-        switch (config('db.connection')) {
+        switch (settings('db.connection')) {
             case 'mysql':
-                $dsn = 'mysql:dbname=' . config('db.name') . ';host=' . config('db.host');
+                $dsn = 'mysql:dbname=' . settings('db.name') . ';host=' . settings('db.host');
                 break;
 
             case 'sqlsrv':
-                $dsn = 'sqlsrv:Server=' . config('db.host') . ';Database=' . config('db.name');
+                $dsn = 'sqlsrv:Server=' . settings('db.host') . ';Database=' . settings('db.name');
                 break;
         }
 
         try {
-            $this->connection = new PDO($dsn, config('db.username'), config('db.password'),[
+            $this->connection = new PDO($dsn, settings('db.username'), settings('db.password'),[
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             ]);

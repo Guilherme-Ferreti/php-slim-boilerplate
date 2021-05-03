@@ -3,9 +3,9 @@
 /**
  * @return string|bool|int|array
  */
-function config(string $keys)
+function settings(string $keys)
 {
-    $config = array(
+    $settings = array(
         'app' => [
             'environment' => 'development',
             'root' => dirname(__FILE__, 2),
@@ -23,17 +23,21 @@ function config(string $keys)
         ],
     
         'views' => [
-            'path' => __DIR__ . '/Views/',
-            'cache_path' => dirname(__FILE__, 2) . '/cache/',
+            'path' => __DIR__ . '../src/Views/',
+            'cache_path' => __DIR__ . '../cache/',
         ],
 
         'logs' => [
-            'path' => dirname(__FILE__, 2) . '/logs/',
+            'path' => __DIR__ . '../logs/',
         ],
 
         'cryptography' => [
-            'openssl_key_path' => __DIR__ . '/Cryptography/keys/openssl.key',
-            'sodium_key_path' => __DIR__ . '/Cryptography/keys/sodium.key',
+            'openssl_key_path' => __DIR__ . '../Cryptography/keys/openssl.key',
+            'sodium_key_path' => __DIR__ . '../Cryptography/keys/sodium.key',
+        ],
+
+        'routes' => [
+            'cache_path' => __DIR__ . '../cache/routes.php',
         ],
     
     );
@@ -41,10 +45,10 @@ function config(string $keys)
     $keys = explode('.', $keys);
 
     foreach ($keys as $key) {
-        if (! isset($config[$key])) return null;
+        if (! isset($settings[$key])) return null;
 
-        $config = $config[$key];
+        $settings = $settings[$key];
     }
 
-    return $config;
+    return $settings;
 }

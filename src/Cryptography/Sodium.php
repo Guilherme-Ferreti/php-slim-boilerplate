@@ -9,7 +9,7 @@ class Sodium
      */
     public static function encrypt(string $value) : string
     {
-        $key = file_get_contents(config('cryptography.sodium_key_path'));
+        $key = file_get_contents(settings('cryptography.sodium_key_path'));
 
         $nonce = random_bytes(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
 
@@ -23,7 +23,7 @@ class Sodium
      */
     public static function decrypt(string $value) : string
     {
-        $key = file_get_contents(config('cryptography.sodium_key_path'));
+        $key = file_get_contents(settings('cryptography.sodium_key_path'));
 
         $value = base64_decode($value);
 

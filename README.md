@@ -4,7 +4,7 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore optio numquam
 
 ## Project Stack
 
-- Language: PHP (version 8.0.0) using [Slim Framework](https://www.slimframework.com/)
+- Language: PHP (version x.x.x) using [Slim Framework](https://www.slimframework.com/) (version 4.7.0)
 
 - Database: MySQL
 
@@ -12,11 +12,13 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore optio numquam
 
 1 - Download
 
-2 - Server entry file must be the following: public/index.php
+2 - Server entry point must be the index.php file int the public folder.
 
 3 - All good
 
-4 - To generate encryption keys, run the following command from the root of your project:
+## Usefull commands
+
+• To generate encryption keys, run the following command from the root of your project:
 
 ```php app/Helpers/generate-encryption-keys.php```
 

@@ -18,7 +18,7 @@ function dd()
 
 function logger(string $name = 'app')
 {
-    $stream = config('logs.path') . "$name.log";
+    $stream = settings('logs.path') . "$name.log";
 
     $logger = new Monolog\Logger($name);
 
