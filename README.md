@@ -23,6 +23,7 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore optio numquam
 ```php src/Helpers/generate-encryption-keys.php```
 
 • Remove dev dependencies and optimize composer's autoloader (Only for deployment):
+
 ```composer install --no-dev --optimize-autoloader```
 
 ## Project documentation

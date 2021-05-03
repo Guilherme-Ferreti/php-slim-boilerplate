@@ -20,11 +20,11 @@ function settings(string $keys)
         ],
     
         'db' => [
-            'connection' => 'sqlsrv',
-            'host' => "localhost\SQLEXPRESS",
-            'name' => 'E_COMMERCE_TESTE',
-            'username' => 'sa',
-            'password' => 'root',
+            'connection' => '', // mysql, sqlsrv
+            'host' => '',
+            'name' => '',
+            'username' => '',
+            'password' => '',
         ],
     
         'views' => [
