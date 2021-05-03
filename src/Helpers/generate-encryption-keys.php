@@ -1,7 +1,7 @@
 <?php
 
 try {
-    $path = dirname(__FILE__, 2) . '/Cryptography/keys';
+    $path = __DIR__ . '/../Cryptography/keys';
 
     file_put_contents("$path/sodium.key", random_bytes(SODIUM_CRYPTO_SECRETBOX_KEYBYTES));
 
