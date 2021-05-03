@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * Define application's settings.
+ * Note that the settings function is available in all project.
+ */
+
+/**
  * @return string|bool|int|array
  */
 function settings(string $keys)

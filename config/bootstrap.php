@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * File responsable for the application bootstrap.
+ */
+
 // Load application settings function
 require_once __DIR__ . '/settings.php';
 
