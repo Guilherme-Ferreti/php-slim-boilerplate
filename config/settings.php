@@ -44,6 +44,10 @@ function settings(string $keys)
         'routes' => [
             'cache_path' => __DIR__ . '/../cache/routes.php',
         ],
+
+        'cors' => [
+            'allowed_origins' => ['http://localhost',],
+        ],
     
     );
 
