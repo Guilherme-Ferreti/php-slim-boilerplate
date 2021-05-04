@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Cryptography;
+namespace App\Helpers\Cryptography;
 
 class OpenSSL 
 {

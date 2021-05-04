@@ -38,8 +38,8 @@ function settings(string $keys)
         ],
 
         'cryptography' => [
-            'openssl_key_path' => __DIR__ . '/../Cryptography/keys/openssl.key',
-            'sodium_key_path' => __DIR__ . '/../Cryptography/keys/sodium.key',
+            'openssl_key_path' => __DIR__ . '/../src/Helpers/Cryptography/keys/openssl.key',
+            'sodium_key_path' => __DIR__ . '/../src/Helpers/Cryptography/keys/sodium.key',
         ],
 
         'routes' => [

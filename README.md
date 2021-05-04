@@ -20,7 +20,7 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore optio numquam
 
 • To generate encryption keys, run the following command from the root of your project:
 
-```php src/Helpers/generate-encryption-keys.php```
+```php src/Helpers/Cryptography/generate-keys.php```
 
 • Remove dev dependencies and optimize composer's autoloader (deployment only):
 
