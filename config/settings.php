@@ -28,8 +28,9 @@ function settings(string $keys)
         ],
     
         'views' => [
-            'path' => __DIR__ . '/../src/Views/',
+            'path' => __DIR__ . '/../resources/views/',
             'cache_path' => __DIR__ . '/../cache/',
+            'extension' => '.twig'
         ],
 
         'logs' => [
