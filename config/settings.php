@@ -14,7 +14,6 @@ function settings(string $keys)
         'app' => [
             'environment' => 'development',
             'root' => dirname(__FILE__, 2),
-            'debug' => true,
             'timezone' => 'America/Sao_Paulo',
             'domain' => 'http://localhost',
         ],
@@ -30,7 +29,7 @@ function settings(string $keys)
         'views' => [
             'path' => __DIR__ . '/../resources/views/',
             'cache_path' => __DIR__ . '/../cache/',
-            'extension' => '.twig'
+            'extension' => '.html'
         ],
 
         'logs' => [
