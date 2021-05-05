@@ -18,6 +18,9 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore optio numquam
 
 ## Usefull commands
 
+• Start development server locally:
+```php -S localhost:80 -t public```
+
 • To generate encryption keys, run the following command from the root of your project:
 
 ```php src/Helpers/Cryptography/generate-keys.php```
