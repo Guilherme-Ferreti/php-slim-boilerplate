@@ -5,7 +5,7 @@ namespace App\Helpers\View;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
 
-class Functions extends AbstractExtension
+class ViewFunctions extends AbstractExtension
 {
     /**
      * Register functions to be used in template.

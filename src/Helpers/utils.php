@@ -2,7 +2,7 @@
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-use App\Helpers\View\Maker as ViewMaker;
+use App\Helpers\View\ViewMaker;
 use Psr\Http\Message\ResponseInterface as Response;
 
 /**

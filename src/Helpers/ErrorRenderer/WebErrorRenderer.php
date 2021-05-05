@@ -3,7 +3,7 @@
 namespace App\Helpers\ErrorRenderer;
 
 use Throwable;
-use App\Helpers\View\Maker as ViewMaker;
+use App\Helpers\View\ViewMaker;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Interfaces\ErrorRendererInterface;
 

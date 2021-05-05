@@ -4,9 +4,9 @@ namespace App\Helpers\View;
 
 use Slim\Views\Twig;
 use Psr\Http\Message\ResponseInterface as Response;
-use App\Helpers\View\Functions as ViewFunctions;
+use App\Helpers\View\ViewFunctions;
 
-class Maker
+class ViewMaker
 {
     public static function make(string $pathToView, array $variables = array(), Response $response = null)
     {
