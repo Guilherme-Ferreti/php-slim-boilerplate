@@ -5,12 +5,8 @@
  * Middlewares added last are the first ones to be executed.
  */
 
-use App\Middlewares\{
-    CorsMiddleware,
-    HttpNotFoundMiddleware,
-};
-
-$app->add(new HttpNotFoundMiddleware());
+use App\Middlewares\CorsMiddleware;
+use App\Helpers\ErrorRenderer\WebErrorRenderer;
 
 $app->add(new CorsMiddleware());
 
@@ -18,4 +14,8 @@ $app->addBodyParsingMiddleware();
 
 $app->addRoutingMiddleware();
 
-$app->addErrorMiddleware((settings('app.environment') === 'development'), true, true, logger());
+$errorMiddleware  = $app->addErrorMiddleware((settings('app.environment') === 'development'), true, true);
+
+$errorHandler = $errorMiddleware->getDefaultErrorHandler();
+
+$errorHandler->registerErrorRenderer('text/html', WebErrorRenderer::class);
