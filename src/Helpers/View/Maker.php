@@ -10,10 +10,12 @@ class Maker
 {
     public static function make(string $pathToView, array $variables = array(), Response $response = null)
     {
+        $debug = (settings('app.environment') === 'development');
+
         $settings = [
             'cache' => settings('views.cache_path'),
-            'debug' => settings('app.debug'),
-            'strict_variables' => settings('app.debug'),
+            'debug' => $debug,
+            'strict_variables' => $debug,
         ];
 
         $twig = Twig::create(settings('views.path'), $settings);
