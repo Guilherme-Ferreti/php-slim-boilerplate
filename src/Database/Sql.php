@@ -26,14 +26,10 @@ class Sql
                 break;
         }
 
-        try {
-            $this->connection = new PDO($dsn, settings('db.username'), settings('db.password'),[
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            ]);
-        } catch (\PDOException $e) {
-            var_dump($e->getMessage());
-        }
+        $this->connection = new PDO($dsn, settings('db.username'), settings('db.password'),[
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ]);
     }
 
     /**
@@ -43,7 +39,7 @@ class Sql
      * @param array $parameters     Parameters to be binded to the query.
      * @return array|false          Array containing query results or false if the statement failed.
      */
-    public function select(string $rawQuery, $parameters = array())
+    public function select(string $rawQuery, array $parameters = [])
     {
         $statement = $this->connection->prepare($rawQuery);
     
@@ -59,7 +55,7 @@ class Sql
      * @param array $paramters      Paramter to be binded to the query.
      * @return boolean              True if the statement succeeded.
      */
-    public function query(string $rawQuery, $parameters = array())
+    public function query(string $rawQuery, array $parameters = [])
     {
         $statement = $this->connection->prepare($rawQuery);
 
