@@ -15,6 +15,7 @@ class ViewFunctions extends AbstractExtension
         return [
             new TwigFunction('settings', 'settings'),
             new TwigFunction('url_for', 'url_for'),
+            new TwigFunction('csrf_token', 'csrf_token'),
             new TwigFunction('only_numbers', 'only_numbers'),
 
             // You can also refer to functions in this class

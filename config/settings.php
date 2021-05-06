@@ -48,6 +48,10 @@ function settings(string $keys)
         'cors' => [
             'allowed_origins' => ['http://localhost',],
         ],
+
+        'csrf_token' => [
+            'max_time' => 60 * 60 * 24 // 24 hours
+        ]
     
     );
 
