@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Helpers\ErrorRenderer;
+namespace App\Exceptions;
 
 use Throwable;
 use App\Helpers\View\ViewMaker;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Interfaces\ErrorRendererInterface;
 
-class WebErrorRenderer implements ErrorRendererInterface
+/**
+ * Responsable for rendering HTML responses when a error occurs.
+ */
+class HTLMRenderer implements ErrorRendererInterface
 {
     public function __invoke(Throwable $exception, bool $displayErrorDetails) : string
     {
