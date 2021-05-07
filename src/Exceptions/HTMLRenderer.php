@@ -19,9 +19,9 @@ class HTMLRenderer implements ErrorRendererInterface
         if (settings('app.environment') === 'development') dd($exception);
 
         if ($exception instanceof HttpNotFoundException) {
-            return ViewMaker::make('site/errors/page-not-found');
+            return ViewMaker::make('site.errors.page-not-found');
         }
 
-        return ViewMaker::make('site/errors/generic', compact('exception'));
+        return ViewMaker::make('site.errors.generic', compact('exception'));
     }
 }

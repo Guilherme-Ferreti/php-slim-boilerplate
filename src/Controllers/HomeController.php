@@ -10,6 +10,6 @@ class HomeController
 {
     public function __invoke(Request $request, Response $response)
     {
-        return view($response, 'site/index', ['title' => 'Homepage! Welcome']);
+        return view($response, 'site.index', ['title' => 'Homepage! Welcome']);
     }
 }
