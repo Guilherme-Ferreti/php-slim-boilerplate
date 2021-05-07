@@ -7,7 +7,7 @@
 
 use App\Middlewares\CorsMiddleware;
 use App\Exceptions\{
-    HTLMRenderer,
+    HTMLRenderer,
     JSONRenderer
 };
 
@@ -21,5 +21,5 @@ $errorMiddleware  = $app->addErrorMiddleware((settings('app.environment') === 'd
 
 $errorHandler = $errorMiddleware->getDefaultErrorHandler();
 
-$errorHandler->registerErrorRenderer('text/html', HTLMRenderer::class);
+$errorHandler->registerErrorRenderer('text/html', HTMLRenderer::class);
 $errorHandler->registerErrorRenderer('application/json', JSONRenderer::class);

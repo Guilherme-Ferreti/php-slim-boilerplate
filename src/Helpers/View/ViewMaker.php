@@ -10,6 +10,8 @@ class ViewMaker
 {
     public static function make(string $pathToView, array $variables = array(), Response $response = null)
     {
+        $pathToView = str_replace('.', '/', $pathToView);
+
         $debug = (settings('app.environment') === 'development');
 
         $settings = [

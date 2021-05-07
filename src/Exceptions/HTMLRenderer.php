@@ -10,7 +10,7 @@ use Slim\Interfaces\ErrorRendererInterface;
 /**
  * Responsable for rendering HTML responses when a error occurs.
  */
-class HTLMRenderer implements ErrorRendererInterface
+class HTMLRenderer implements ErrorRendererInterface
 {
     public function __invoke(Throwable $exception, bool $displayErrorDetails) : string
     {
