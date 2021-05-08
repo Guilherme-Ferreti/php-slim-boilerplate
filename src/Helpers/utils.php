@@ -157,3 +157,23 @@ function delete_csrf_token() : bool
 
     return true;
 }
+
+function sodium_encrypt(string $value)
+{
+    return App\Helpers\Cryptography\Sodium::encrypt($value);
+}
+
+function sodium_decrypt(string $value)
+{
+    return App\Helpers\Cryptography\Sodium::decrypt($value);
+}
+
+function openSSL_encrypt(string $value)
+{
+    return App\Helpers\Cryptography\OpenSSL::encrypt($value);
+}
+
+function openSSL_decrypt(string $value)
+{
+    return App\Helpers\Cryptography\OpenSSL::decrypt($value);
+}
