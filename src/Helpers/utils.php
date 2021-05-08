@@ -162,22 +162,16 @@ function delete_csrf_token() : bool
     return true;
 }
 
-function sodium_encrypt(string $value)
+function encrypt(string $classname, string $value)
 {
-    return App\Helpers\Cryptography\Sodium::encrypt($value);
+    $classname = "\App\Helpers\Cryptography\\$classname";
+
+    return $classname::encrypt($value);
 }
 
-function sodium_decrypt(string $value)
+function decrypt(string $classname, string $value)
 {
-    return App\Helpers\Cryptography\Sodium::decrypt($value);
-}
+    $classname = "\App\Helpers\Cryptography\\$classname";
 
-function openSSL_encrypt(string $value)
-{
-    return App\Helpers\Cryptography\OpenSSL::encrypt($value);
-}
-
-function openSSL_decrypt(string $value)
-{
-    return App\Helpers\Cryptography\OpenSSL::decrypt($value);
+    return $classname::decrypt($value);
 }
