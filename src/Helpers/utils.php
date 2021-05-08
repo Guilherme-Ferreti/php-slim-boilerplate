@@ -1,8 +1,9 @@
 <?php
 
 use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
+use App\Helpers\Session;
 use App\Helpers\View\ViewMaker;
+use Monolog\Handler\StreamHandler;
 use Psr\Http\Message\ResponseInterface as Response;
 
 /**
@@ -17,6 +18,50 @@ function dd()
     }
 
     exit;
+}
+
+/**
+ * Get or set values into session.
+ */
+function session($key = null, $default = null)
+{
+    if (is_string($key)) {
+        return Session::get($key, $default);
+    }
+
+    if (is_array($key)) {
+        $keys = $key;
+
+        foreach ($keys as $key => $value) {
+            Session::set($key, $value);
+        }
+        
+        return $keys;
+    }
+
+    return Session::getAll();
+}
+
+/**
+ * Get or set values into flash session.
+ */
+function flash($key = null, $default = null)
+{
+    if (is_string($key)) {
+        return Session::getFlash($key, $default);
+    }
+
+    if (is_array($key)) {
+        $keys = $key;
+
+        foreach ($key as $key => $value) {
+            Session::setFlash($key, $value);
+        }
+        
+        return $keys;
+    }
+
+    return Session::get(Session::FLASH_KEY);
 }
 
 /**
@@ -50,9 +95,7 @@ function view(Response $response, string $pathToView, array $variables = [])
  */
 function url_for(string $routeName, array $data = [], array $queryParams = [])
 {
-    global $app;
-
-    $routeParser = $app->getRouteCollector()->getRouteParser();
+    $routeParser = $GLOBALS['app']->getRouteCollector()->getRouteParser();
 
     return $routeParser->urlFor($routeName, $data, $queryParams);
 }
@@ -80,8 +123,8 @@ function csrf_token() : string
 {
     $token = md5(uniqid(rand(), true));
 
-    $_SESSION['csrf_token'] = $token;
-    $_SESSION['csrf_token_time'] = time();
+    session('csrf_token', $token);
+    session('csrf_token_time', time());
 
     return '<input type="hidden" name="csrf_token" value="' . $token . '">';
 }
@@ -91,13 +134,13 @@ function csrf_token() : string
  */
 function validate_csrf_token(string $token) : bool
 {
-    if ($token !== $_SESSION['csrf_token']) {
+    if ($token !== session('csrf_token')) {
         return false;
     }
 
     $maxTime = settings('csrf_token.max_time');
 
-    if (($_SESSION['csrf_token_time'] + $maxTime) <= time()) {
+    if ((session('csrf_token_time') + $maxTime) <= time()) {
         return false;
     }
 
@@ -109,8 +152,8 @@ function validate_csrf_token(string $token) : bool
  */
 function delete_csrf_token() : bool
 {
-    $_SESSION['csrf_token'] = null;
-    $_SESSION['csrf_token_time'] = null;
+    session('csrf_token', null);
+    session('csrf_token_time', null);
 
     return true;
 }

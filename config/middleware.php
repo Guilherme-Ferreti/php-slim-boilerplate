@@ -6,12 +6,15 @@
  */
 
 use App\Middlewares\CorsMiddleware;
+use App\Middlewares\SessionMiddleware;
 use App\Exceptions\{
     HTMLRenderer,
     JSONRenderer
 };
 
 $app->add(new CorsMiddleware());
+
+$app->add(new SessionMiddleware());
 
 $app->addBodyParsingMiddleware();
 
