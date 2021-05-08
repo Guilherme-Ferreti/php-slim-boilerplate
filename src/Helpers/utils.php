@@ -123,8 +123,10 @@ function csrf_token() : string
 {
     $token = md5(uniqid(rand(), true));
 
-    session('csrf_token', $token);
-    session('csrf_token_time', time());
+    session([
+        'csrf_token' => $token, 
+        'csrf_token_time' => time()
+    ]);
 
     return '<input type="hidden" name="csrf_token" value="' . $token . '">';
 }
@@ -152,8 +154,10 @@ function validate_csrf_token(string $token) : bool
  */
 function delete_csrf_token() : bool
 {
-    session('csrf_token', null);
-    session('csrf_token_time', null);
+    session([
+        'csrf_token' => null, 
+        'csrf_token_time' => null
+    ]);
 
     return true;
 }
