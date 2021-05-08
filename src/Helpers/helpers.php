@@ -162,14 +162,14 @@ function delete_csrf_token() : bool
     return true;
 }
 
-function encrypt(string $classname, string $value)
+function encrypt(string $value, string $classname = 'OpenSSL')
 {
     $classname = "\App\Helpers\Cryptography\\$classname";
 
     return $classname::encrypt($value);
 }
 
-function decrypt(string $classname, string $value)
+function decrypt(string $value, string $classname = 'OpenSSL')
 {
     $classname = "\App\Helpers\Cryptography\\$classname";
 

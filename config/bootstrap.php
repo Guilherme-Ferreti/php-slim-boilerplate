@@ -30,8 +30,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // Create APP instance
 $app = Slim\Factory\AppFactory::create();
 
-// Load util functions
-require_once __DIR__ . '/../src/Helpers/utils.php';
+// Load helper functions
+require_once __DIR__ . '/../src/Helpers/helpers.php';
 
 // Register middlewares
 require_once __DIR__ . '/middleware.php';
