@@ -45,7 +45,7 @@ class Sql
     
         $result = $statement->execute($parameters);
 
-        return ($result === false) ? false : $statement->fetchAll();
+        return ($result === false) ? [] : $statement->fetchAll();
     }
 
     /**
