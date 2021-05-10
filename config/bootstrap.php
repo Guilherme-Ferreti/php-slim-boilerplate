@@ -39,8 +39,8 @@ require_once __DIR__ . '/../src/Helpers/helpers.php';
 // Register middlewares
 require_once __DIR__ . '/middleware.php';
 
-// Register application caching
-require_once __DIR__ . '/cache.php';
+// Register application route caching
+require_once __DIR__ . '/route-cache.php';
 
 // Register routes
 require_once __DIR__ . '/../src/Routes/web.php';
