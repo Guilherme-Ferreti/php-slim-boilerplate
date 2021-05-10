@@ -10,8 +10,13 @@ abstract class BaseValidator
 
     protected $validation;
 
-    public function __construct(array $inputs)
+    /** Model to be used for the validation rules */
+    protected $model;
+
+    public function __construct(array $inputs, $model = null)
     {
+        $this->model = $model;
+
         $validator = new Validator();
 
         $this->addCustomValidators($validator);
