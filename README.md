@@ -12,21 +12,9 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore optio numquam
 
 1 - Download
 
-2 - Server entry point must be the index.php file in the public folder.
+2 - Server entry point must be the index.php file int the public folder.
 
 3 - All good
-
-## Database
-
-This project uses Illuminate\Database to manage SQL queries.
-
-If you want to query the tables without using a model, first import Capsule Manager.
-
-``` use Illuminate\Database\Capsule\Manager as DB; ```
-
-Then use as the following example, where we query all users from users table.
-
-``` $users = DB::table('users')->get(); ```
 
 ## Usefull commands
 

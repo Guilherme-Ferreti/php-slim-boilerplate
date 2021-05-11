@@ -12,24 +12,24 @@ function settings(string $keys)
 {
     $settings = array(
         'app' => [
-            'environment'   => 'development',
-            'root'          => dirname(__FILE__, 2),
-            'timezone'      => 'America/Sao_Paulo',
-            'domain'        => 'http://localhost',
+            'environment' => 'development',
+            'root' => dirname(__FILE__, 2),
+            'timezone' => 'America/Sao_Paulo',
+            'domain' => 'http://localhost',
         ],
     
         'db' => [
-            'connection'    => 'sqlsrv',  // mysql, sqlsrv
-            'host'          => 'Localhost\\SQLEXPRESS',
-            'name'          => 'gamereviewer',
-            'username'      => 'sa',
-            'password'      => 'root',
+            'connection' => '', // mysql, sqlsrv
+            'host' => '',
+            'name' => '',
+            'username' => '',
+            'password' => '',
         ],
     
         'views' => [
-            'path'          => __DIR__ . '/../resources/views/',
-            'cache_path'    => __DIR__ . '/../cache/',
-            'extension'     => '.html'
+            'path' => __DIR__ . '/../resources/views/',
+            'cache_path' => __DIR__ . '/../cache/',
+            'extension' => '.html'
         ],
 
         'logs' => [
@@ -37,8 +37,8 @@ function settings(string $keys)
         ],
 
         'cryptography' => [
-            'openssl_key_path'  => __DIR__ . '/../src/Helpers/Cryptography/keys/openssl.key',
-            'sodium_key_path'   => __DIR__ . '/../src/Helpers/Cryptography/keys/sodium.key',
+            'openssl_key_path' => __DIR__ . '/../src/Helpers/Cryptography/keys/openssl.key',
+            'sodium_key_path' => __DIR__ . '/../src/Helpers/Cryptography/keys/sodium.key',
         ],
 
         'routes' => [

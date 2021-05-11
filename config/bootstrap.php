@@ -30,9 +30,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // Create APP instance
 $app = Slim\Factory\AppFactory::create();
 
-// Boot database
-new \App\Database\Database();
-
 // Load helper functions
 require_once __DIR__ . '/../src/Helpers/helpers.php';
 
