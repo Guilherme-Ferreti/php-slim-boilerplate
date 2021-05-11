@@ -3,7 +3,6 @@
 namespace App\Validations\Rules;
 
 use Rakit\Validation\Rule;
-use Illuminate\Database\Capsule\Manager as DB;
 
 class Unique extends Rule
 {
@@ -19,7 +18,9 @@ class Unique extends Rule
         $column = $this->parameter('column');
         $except_id = (int) $this->parameter('except_id');
 
-        $results = DB::table($table)->where($column, $value)->where('id', '!=', $except_id)->get();
+        $db = new \App\Database\Sql();
+
+        $results = $db->select("SELECT * FROM $table WHERE $column = :value AND id != :id", [':value' => $value, ':id' => $except_id]);
 
         return count($results) === 0;
     }
