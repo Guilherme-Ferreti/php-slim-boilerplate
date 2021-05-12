@@ -1,6 +1,6 @@
 # PHP Slim Framework MVC Boilerplate
 
-This project provides a simple Model-View-Controller skeleton for quickly setting up an [Slim Framework](https://www.slimframework.com/) application.
+This project provides a simple Model-View-Controller skeleton for quickly setting up a [Slim Framework](https://www.slimframework.com/) application.
 
 ## Requirements
 
@@ -32,7 +32,7 @@ That's it. Now create an awsome application.
 
 This boilerplate comes with some features and basic folder structure. Feel free to change its structure anyway you want to.
 
-#####  Built-in features and folder structure:
+####  Built-in features and folder structure:
 
 * Model, View and Controller pre-defined folders.
 * ViewMaker class, powered by [Twig Template Engine](https://twig.symfony.com/).
@@ -54,3 +54,9 @@ This boilerplate comes with some features and basic folder structure. Feel free 
 • Remove dev dependencies and optimize composer's autoloader (deployment only):
 
 ```composer install --no-dev --optimize-autoloader```
+
+## RoadMap
+Future additions to this project include:
+* Migrations
+* Better command line usage
+* Resources for easily converting Models to JSON.
