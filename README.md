@@ -1,25 +1,51 @@
-## Project name
+# PHP Slim Framework MVC Boilerplate
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore optio numquam reprehenderit quaerat vitae facere doloremque esse ea commodi. Earum alias, ipsa magnam illum nulla aspernatur magni et natus. Cumque? (Description)
+This project provides a simple Model-View-Controller skeleton for quickly setting up an [Slim Framework](https://www.slimframework.com/) application.
 
-## Project Stack
+## Requirements
 
-- Language: PHP (version x.x.x) using [Slim Framework](https://www.slimframework.com/) (version 4.7.0)
+* PHP 7.3 or newer.
 
-- Database: MySQL
+## Installation
 
-## Project setup
+Start by cloning this repository. 
 
-1 - Download
+``` git clone https://github.com/Guilherme-Ferreti/php-slim-boilerplate.git```
 
-2 - Server entry point must be the index.php file int the public folder.
+Make sure you have installed Composer. If not, please check its official [guide](http://getcomposer.org/doc/00-intro.md#installation).
 
-3 - All good
+When ready, install the dependencies by running the following command in your application's root folder:
 
-## Usefull commands
+```composer install```
 
-• Start development server locally:
+Rename <b>settings-example.php</b> to <b>settings.php</b> inside the config folder.
+
+Point your virtual host document root to application's public/ directory. 
+
+If you are not using tools like WAMP or Apache, you may use PHP built-in server.
+
 ```php -S localhost:80 -t public```
+
+That's it. Now create an awsome application.
+
+## Features
+
+This boilerplate comes with some features and basic folder structure. Feel free to change its structure anyway you want to.
+
+#####  Built-in features and folder structure:
+
+* Model, View and Controller pre-defined folders.
+* ViewMaker class, powered by [Twig Template Engine](https://twig.symfony.com/).
+* Web and Api routes files.
+* CSRF and CORS Middleware protection.
+* Database class.
+* Rakit\Validation Library and Rules.
+* Policies for authorazing actions.
+* Application general logging, powered by famous [Monolog](https://seldaek.github.io/monolog/).
+* Helper functions to deal with session, flash session, cryptography with OpenSSL and Sodium.
+* PHPUnit for testing.
+
+## Useful commands
 
 • To generate encryption keys, run the following command from the root of your project:
 
@@ -28,7 +54,3 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore optio numquam
 • Remove dev dependencies and optimize composer's autoloader (deployment only):
 
 ```composer install --no-dev --optimize-autoloader```
-
-## Project documentation
-
-The documentation can be found here: https://github.com/docshere
