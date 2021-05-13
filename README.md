@@ -59,4 +59,3 @@ This boilerplate comes with some features and basic folder structure. Feel free 
 Future additions to this project include:
 * Migrations
 * Better command line usage
-* Resources for easily converting Models to JSON.
