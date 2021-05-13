@@ -46,11 +46,17 @@ abstract class BaseModel
      * 
      * @return array
      */
-    public function toArray()
+    public function toArray() : array
     {
-        $this->db = null;
+        unset($this->db);
 
-        return get_object_vars($this);
+        $keys = array_keys(get_object_vars($this));
+
+        foreach ($keys as $key) {
+            $attributes[$key] = $this->{'get' . $key}();
+        }
+
+        return $attributes;
     }
 
     /**
