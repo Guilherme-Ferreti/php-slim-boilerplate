@@ -36,7 +36,7 @@ This boilerplate comes with some features and basic folder structure. Feel free 
 
 * Model, View and Controller pre-defined folders.
 * ViewMaker class, powered by [Twig Template Engine](https://twig.symfony.com/).
-* Web and Api routes files.
+* Web and API routes files.
 * CSRF and CORS Middleware protection.
 * Database class.
 * Rakit\Validation Library and Rules.
