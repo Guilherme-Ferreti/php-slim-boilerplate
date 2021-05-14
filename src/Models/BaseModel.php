@@ -7,8 +7,9 @@ use App\Database\Sql;
 abstract class BaseModel 
 {
     protected $db;
+    protected static $table;
 
-    public function __construct($attributes = array())
+    public function __construct(array $attributes = [])
     {
         $this->setAttributes($attributes);
     }
@@ -16,7 +17,7 @@ abstract class BaseModel
     /**
      * Set all given attributes into the model.
      */
-    public function setAttributes($attributes = array())
+    public function setAttributes(array $attributes = [])
     {
         foreach ($attributes as $attribute => $value) {
             $this->{'set' . $attribute}($value);
@@ -34,10 +35,10 @@ abstract class BaseModel
 
         switch ($operation) {
             case 'get':
-                return $this->{$attribute};
+                return $this->{strtolower($attribute)};
 
             case 'set':
-                $this->{$attribute} = $args[0];
+                $this->{strtolower($attribute)} = $args[0];
         }
     }
 
