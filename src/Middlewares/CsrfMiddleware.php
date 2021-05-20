@@ -10,7 +10,7 @@ class CsrfMiddleware
 {
     public function __invoke(Request $request, RequestHandler $handler) : Response 
     {
-        $parsedBody = $request->getParsedBody();
+        $parsedBody = (array) $request->getParsedBody();
 
         $token = $parsedBody['csrf_token'] ?? null;
 
@@ -20,8 +20,6 @@ class CsrfMiddleware
 
         delete_csrf_token();
 
-        $response = $handler->handle($request);
-
-        return $response;
+        return $handler->handle($request);
     }
 }
