@@ -175,3 +175,11 @@ function decrypt(string $value, string $classname = 'OpenSSL')
 
     return $classname::decrypt($value);
 }
+
+/**
+ * Returns current date and time as string.
+ */
+function now() : string
+{
+    return date('Y-m-d H:i:s');
+}
