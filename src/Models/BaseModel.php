@@ -48,9 +48,11 @@ abstract class BaseModel
     {
         $keys = array_keys(get_object_vars($this));
 
-        unset($keys['db']);
+        $hide = ['db'];
 
         foreach ($keys as $key) {
+            if (in_array($key, $hide)) continue;
+            
             $attributes[$key] = $this->{'get' . $key}();
         }
 
