@@ -183,3 +183,8 @@ function now() : string
 {
     return date('Y-m-d H:i:s');
 }
+
+function method(string $method) : string
+{
+    return '<input type="hidden" name="_METHOD" value="' . strtoupper($method) . '"/>';
+}

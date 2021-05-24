@@ -11,12 +11,15 @@ use App\Exceptions\{
     HTMLRenderer,
     JSONRenderer
 };
+use Slim\Middleware\MethodOverrideMiddleware;
 
 $app->add(new CorsMiddleware());
 
 $app->add(new SessionMiddleware());
 
 $app->addBodyParsingMiddleware();
+
+$app->add(new MethodOverrideMiddleware());
 
 $app->addRoutingMiddleware();
 
