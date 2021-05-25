@@ -39,7 +39,7 @@ This boilerplate comes with some features and basic folder structure. Feel free 
 * Web and API routes files.
 * CSRF and CORS Middleware protection.
 * Database class.
-* Rakit\Validation Library and Rules.
+* [Rakit\Validation Library](https://github.com/rakit/validation) and Rules.
 * Policies for authorazing actions.
 * Application general logging, powered by famous [Monolog](https://seldaek.github.io/monolog/).
 * Helper functions to deal with session, flash session, cryptography with OpenSSL and Sodium.

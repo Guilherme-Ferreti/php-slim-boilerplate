@@ -58,11 +58,19 @@ abstract class BaseValidator
     {
         return $this->validation->fails();
     }
+    
+    /**
+     * Set error bag and validated data into flash session.
+     */
+    public function handleFailure() : void
+    {
+        flash(['errorBag' => $this->errors()] + $this->getValidatedData());
+    }
 
     /** 
      * Returns Rakit ErrorBag containing the validation errors.
     */
-    public function getErrors() : ErrorBag
+    public function errors() : ErrorBag
     {
         return $this->validation->errors();
     }
@@ -76,6 +84,22 @@ abstract class BaseValidator
     }
 
     /**
+     * Retrieves data that went through validation.
+     */
+    public function getValidatedData() : array
+    {
+        return $this->validation->getValidatedData();
+    }
+
+    /**
+     * Retrieves data that was not validated.
+     */
+    public function getInvalidData() : array
+    {
+        return $this->validation->getInvalidData();
+    }
+
+    /**
      * Treats data before validation.
      */
     protected function sanitize(array $inputs) : array
@@ -83,18 +107,24 @@ abstract class BaseValidator
         return $inputs;
     }
 
-    /**
-     * Rules to be used for validation.
-     */
-    abstract protected function rules() : array;
-
     /** 
      * Aliases to inputs being validated.
-    */
-    abstract protected function aliases() : array;
+     */
+    protected function aliases() : array
+    {
+        return [];
+    }
 
     /**
      * Messages to be used for validation errors.
      */
-    abstract protected function messages() : array;
+    protected function messages() : array 
+    {
+        return [];
+    }
+    
+    /**
+     * Rules to be used for validation.
+     */
+    abstract protected function rules() : array;
 }

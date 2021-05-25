@@ -6,9 +6,14 @@ class Session
 {
     const FLASH_KEY = 'flash_session';
     const DONT_FLASH = ['password'];
+    const SERIALIZE = ['errorBag'];
 
     public static function set(string $key, $value)
     {
+        if (in_array($key, self::SERIALIZE)) {
+            $value = serialize($value);
+        }
+
         $_SESSION[$key] = $value;
     }
 
@@ -18,7 +23,13 @@ class Session
             return $default;
         }
 
-        return $_SESSION[$key];
+        $value = $_SESSION[$key];
+
+        if (in_array($key, self::SERIALIZE)) {
+            $value = unserialize($value);
+        }
+
+        return $value;
     }
 
     /**
@@ -35,6 +46,11 @@ class Session
     public static function setFlash(string $key, $value)
     {
         if (! in_array($key, self::DONT_FLASH)) {
+
+            if (in_array($key, self::SERIALIZE)) {
+                $value = serialize($value);
+            }
+            
             $_SESSION[self::FLASH_KEY][$key] = $value;
         }
     }
@@ -51,6 +67,10 @@ class Session
         $value = $GLOBALS[self::FLASH_KEY][$key];
 
         unset($GLOBALS[self::FLASH_KEY][$key]);
+
+        if (in_array($key, self::SERIALIZE)) {
+            $value = unserialize($value);
+        }
 
         return $value;
     }
