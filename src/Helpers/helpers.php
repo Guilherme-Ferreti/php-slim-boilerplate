@@ -103,7 +103,7 @@ function url_for(string $routeName, array $data = [], array $queryParams = [])
 /**
  * Redirect user to specified route.
  */
-function redirect($response, string $routeName, array $data = [], array $queryParams = [], int $status = 200)
+function redirect(Response $response, string $routeName, array $data = [], array $queryParams = [], int $status = 200)
 {
     return $response->withHeader('location', url_for($routeName, $data, $queryParams))->withStatus($status);
 }
