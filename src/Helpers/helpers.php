@@ -123,10 +123,14 @@ function csrf_token() : string
 {
     $token = md5(uniqid(rand(), true));
 
-    session([
-        'csrf_token' => $token, 
-        'csrf_token_time' => time()
-    ]);
+    $session_tokens = session('csrf_tokens') ?? [];
+
+    $session_tokens[] = [
+        'value' => $token, 
+        'time' => time()
+    ];
+
+    session(['csrf_tokens' => $session_tokens]);
 
     return '<input type="hidden" name="csrf_token" value="' . $token . '">';
 }
@@ -136,28 +140,25 @@ function csrf_token() : string
  */
 function validate_csrf_token(string $token) : bool
 {
-    if ($token !== session('csrf_token')) {
-        return false;
-    }
+    $session_tokens = session('csrf_tokens') ?? [];
 
     $maxTime = settings('csrf_token.max_time');
 
-    if ((session('csrf_token_time') + $maxTime) <= time()) {
-        return false;
+    foreach ($session_tokens as $session_token) {
+        if ($token === $session_token['value'] && ($session_token['time'] + $maxTime) >= time()) {
+            return true;
+        }
     }
 
-    return true;
+    return false;
 }
 
 /**
  * Delete current CSRF token from session.
  */
-function delete_csrf_token() : bool
+function delete_csrf_tokens() : bool
 {
-    session([
-        'csrf_token' => null, 
-        'csrf_token_time' => null
-    ]);
+    session(['csrf_tokens' => null]);
 
     return true;
 }
@@ -188,7 +189,6 @@ function method(string $method) : string
 {
     return '<input type="hidden" name="_METHOD" value="' . strtoupper($method) . '"/>';
 }
-
 
 /**
  * Checks if a model exists in the given array.

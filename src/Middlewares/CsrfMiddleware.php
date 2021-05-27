@@ -18,7 +18,7 @@ class CsrfMiddleware
             throw new \Slim\Exception\HttpBadRequestException($request, 'Invalid CSRF Token');
         }
 
-        delete_csrf_token();
+        delete_csrf_tokens();
 
         return $handler->handle($request);
     }
