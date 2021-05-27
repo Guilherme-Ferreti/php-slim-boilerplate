@@ -188,3 +188,22 @@ function method(string $method) : string
 {
     return '<input type="hidden" name="_METHOD" value="' . strtoupper($method) . '"/>';
 }
+
+
+/**
+ * Checks if a model exists in the given array.
+ */
+function model_is_in_array($model, array $array) : bool
+{
+    foreach ($array as $value) {
+        if (is_numeric($value) && $model->getId() == $value) {
+            return true;
+        }
+
+        if (is_object($value) && $model->getId() == $value->getId()) {
+            return true;
+        }
+    }
+
+    return false;
+}
