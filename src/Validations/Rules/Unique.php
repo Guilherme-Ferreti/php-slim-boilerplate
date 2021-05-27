@@ -20,8 +20,8 @@ class Unique extends Rule
 
         $db = new \App\Database\Sql();
 
-        $results = $db->select("SELECT * FROM $table WHERE $column = :value AND id != :id", [':value' => $value, ':id' => $except_id]);
+        $results = $db->select("SELECT COUNT($column) AS total_rows FROM $table WHERE $column = :value AND id != :id", [':value' => $value, ':id' => $except_id]);
 
-        return count($results) === 0;
+        return (int) $results[0]['total_rows'] === 0;
     }
 }
