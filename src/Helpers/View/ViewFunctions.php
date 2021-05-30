@@ -19,7 +19,8 @@ class ViewFunctions extends AbstractExtension
             new TwigFunction('only_numbers', 'only_numbers'),
             new TwigFunction('flash', 'flash'),
             new TwigFunction('method', 'method'),
-
+            new TwigFunction('model_is_in_array', 'model_is_in_array'),
+            
             // You can also refer to functions in this class
             // new TwigFunction('example_function', [$this, 'example_function']),
 
