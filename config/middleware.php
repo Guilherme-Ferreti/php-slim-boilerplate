@@ -5,7 +5,6 @@
  * Middlewares added last are the first ones to be executed.
  */
 
-use App\Middlewares\CorsMiddleware;
 use App\Middlewares\SessionMiddleware;
 use App\Exceptions\{
     HTMLRenderer,
@@ -13,15 +12,13 @@ use App\Exceptions\{
 };
 use Slim\Middleware\MethodOverrideMiddleware;
 
-$app->add(new CorsMiddleware());
-
 $app->add(new SessionMiddleware());
 
 $app->addBodyParsingMiddleware();
 
-$app->add(new MethodOverrideMiddleware());
-
 $app->addRoutingMiddleware();
+
+$app->add(new MethodOverrideMiddleware());
 
 $errorMiddleware  = $app->addErrorMiddleware((settings('app.environment') === 'development'), true, true);
 
