@@ -15,12 +15,12 @@ class ViewMaker
         $debug = (settings('app.environment') === 'development');
 
         $settings = [
-            'cache' => settings('views.cache_path'),
+            'cache' => path(settings('views.cache_path')),
             'debug' => $debug,
             'strict_variables' => $debug,
         ];
 
-        $twig = Twig::create(settings('views.path'), $settings);
+        $twig = Twig::create(path(settings('views.path')), $settings);
 
         $twig->addExtension(new ViewFunctions());
 
@@ -34,7 +34,6 @@ class ViewMaker
             return $twig->render($response, $pathToView, $variables);
         }
 
-        return $twig->fetch($pathToView, $variables);
-
+        return $twig->fetch(path($pathToView), $variables);
     }
 }

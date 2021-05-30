@@ -11,7 +11,7 @@ class OpenSSL
      */
     public static function encrypt(string $value) : string
     {
-        $key = file_get_contents(settings('cryptography.openssl_key_path'));
+        $key = file_get_contents(path(settings('cryptography.openssl_key_path')));
 
         $iv = random_bytes(openssl_cipher_iv_length(OpenSSL::CIPHER));
 
@@ -25,7 +25,7 @@ class OpenSSL
      */
     public static function decrypt(string $value) : string
     {
-        $key = file_get_contents(settings('cryptography.openssl_key_path'));
+        $key = file_get_contents(path(settings('cryptography.openssl_key_path')));
 
         $value = base64_decode($value);
 
