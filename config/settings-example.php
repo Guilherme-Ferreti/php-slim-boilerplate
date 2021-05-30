@@ -10,10 +10,12 @@
  */
 function settings(string $keys)
 {
+    $root = dirname(__FILE__, 2);
+
     $settings = array(
         'app' => [
             'environment'   => 'development',
-            'root'          => dirname(__FILE__, 2),
+            'root'          => $root,
             'timezone'      => 'America/Sao_Paulo',
             'domain'        => 'http://localhost',
         ],
@@ -27,31 +29,39 @@ function settings(string $keys)
         ],
     
         'views' => [
-            'path'          => __DIR__ . '/../resources/views/',
-            'cache_path'    => __DIR__ . '/../cache/',
+            'path'          => $root . '/resources/views/',
+            'cache_path'    => $root . '/cache/',
             'extension'     => '.html'
         ],
 
         'logs' => [
-            'path' => __DIR__ . '/../logs/',
+            'path' => $root . '/logs/',
         ],
 
         'cryptography' => [
-            'openssl_key_path'  => __DIR__ . '/../src/Helpers/Cryptography/keys/openssl.key',
-            'sodium_key_path'   => __DIR__ . '/../src/Helpers/Cryptography/keys/sodium.key',
+            'openssl_key_path'  => $root . '/src/Helpers/Cryptography/keys/openssl.key',
+            'sodium_key_path'   => $root . '/src/Helpers/Cryptography/keys/sodium.key',
         ],
 
         'routes' => [
-            'cache_path' => __DIR__ . '/../cache/routes.php',
+            'cache_path' => $root . '/cache/routes.php',
         ],
 
         'cors' => [
-            'allowed_origins' => ['http://localhost',],
+            'allowed_origins' => ['http://localhost'],
         ],
 
         'csrf_token' => [
             'max_time' => 60 * 60 * 24 // 24 hours
-        ]
+        ],
+
+        'storage' => [
+            'local' => [
+                'public_disk_path' => $root . '/public/storage/',
+                'private_disk_path' => $root . '/storage/',
+                'public_disk_url' => '/storage/',
+            ],
+        ],
     
     );
 
