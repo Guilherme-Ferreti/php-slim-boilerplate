@@ -215,3 +215,12 @@ function path(string $path) : string
     
     return str_replace('/', DIRECTORY_SEPARATOR, $path);
 }
+
+function makeFilename(UploadedFileInterface $file) : string
+{
+    $extension = pathinfo($file->getClientFilename(), PATHINFO_EXTENSION);
+
+    $basename = bin2hex(random_bytes(8));
+
+    return sprintf('%s.%0.8s', $basename, $extension);
+}
