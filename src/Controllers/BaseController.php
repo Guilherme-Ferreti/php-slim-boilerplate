@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class BaseController
+abstract class BaseController
 {
     const POLICIES_NAMESPACE = '\App\Policies\\';
 
