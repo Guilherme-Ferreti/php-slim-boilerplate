@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Database\Sql;
-
 abstract class BaseModel 
 {
     public function __construct(array $attributes = [])
