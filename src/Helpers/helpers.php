@@ -4,6 +4,7 @@ use Monolog\Logger;
 use App\Helpers\Session;
 use App\Helpers\View\ViewMaker;
 use Monolog\Handler\StreamHandler;
+use Psr\Http\Message\UploadedFileInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 
 /**
@@ -177,9 +178,6 @@ function decrypt(string $value, string $classname = 'OpenSSL')
     return $classname::decrypt($value);
 }
 
-/**
- * Returns current date and time as string.
- */
 function now() : string
 {
     return date('Y-m-d H:i:s');
@@ -206,4 +204,14 @@ function model_is_in_array($model, array $array) : bool
     }
 
     return false;
+}
+
+/**
+ * Add DIRECTORY_SEPARATOR to path segments.
+ */
+function path(string $path) : string
+{
+    $path = str_replace('//', '/', $path);
+    
+    return str_replace('/', DIRECTORY_SEPARATOR, $path);
 }
