@@ -32,7 +32,11 @@ class LocalStorage
 
     public function delete(string $path) : bool
     {
-        return unlink(path($this->getDiskPath() . $path));
+        $path = path($this->getDiskPath() . $path);
+
+        if (! file_exists($path)) return false;
+
+        return unlink($path);
     }
 
     public static function url(string $path, string $default = '') : string
