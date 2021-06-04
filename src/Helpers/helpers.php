@@ -2,10 +2,8 @@
 
 use Monolog\Logger;
 use App\Helpers\Session;
-use App\Helpers\View\ViewMaker;
 use Monolog\Handler\StreamHandler;
 use Psr\Http\Message\UploadedFileInterface;
-use Psr\Http\Message\ResponseInterface as Response;
 
 /**
  * Dump given variables and exit the application.
@@ -80,18 +78,6 @@ function logger(string $name = 'app')
 }
 
 /**
- * Render a view.
- * 
- * Different from ViewMaker::make(), this function receives Response as it's first argument.
- * 
- * This helper function should be used to make controllers cleaner.
- */
-function view(Response $response, string $pathToView, array $variables = [])
-{
-   return ViewMaker::make($pathToView, $variables, $response);
-}
-
-/**
  * Return the URL for the given route.
  */
 function url_for(string $routeName, array $data = [], array $queryParams = [])
@@ -99,14 +85,6 @@ function url_for(string $routeName, array $data = [], array $queryParams = [])
     $routeParser = $GLOBALS['app']->getRouteCollector()->getRouteParser();
 
     return $routeParser->urlFor($routeName, $data, $queryParams);
-}
-
-/**
- * Redirect user to specified route.
- */
-function redirect(Response $response, string $routeName, array $data = [], array $queryParams = [], int $status = 200)
-{
-    return $response->withHeader('location', url_for($routeName, $data, $queryParams))->withStatus($status);
 }
 
 /**

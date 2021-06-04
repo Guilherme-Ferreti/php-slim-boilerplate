@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Helpers\View\ViewMaker;
+use Psr\Http\Message\ResponseInterface as Response;
+
 abstract class BaseController
 {
     const POLICIES_NAMESPACE = '\App\Policies\\';
@@ -28,5 +31,16 @@ abstract class BaseController
         $policy = new $classname();
 
         return $policy->$action($user, $model);
+    }
+
+    protected function view(Response $response, string $pathToView, array $variables = [])
+    {
+        return ViewMaker::make($pathToView, $variables, $response);
+    }
+
+    protected function redirect(Response $response, string $routeName, array $data = [], array $queryParams = [], int $status = 200)
+    {
+        return $response->withHeader('location', url_for($routeName, $data, $queryParams))
+                        ->withStatus($status);
     }
 }

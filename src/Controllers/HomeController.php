@@ -9,6 +9,6 @@ class HomeController extends BaseController
 {
     public function __invoke(Request $request, Response $response)
     {
-        return view($response, 'site.index', ['title' => 'Homepage! Welcome']);
+        return $this->view($response, 'site.index', ['title' => 'Homepage! Welcome']);
     }
 }
