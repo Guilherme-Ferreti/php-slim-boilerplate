@@ -6,7 +6,7 @@
  */
 
 use App\Middlewares\SessionMiddleware;
-use App\Exceptions\{
+use App\Exceptions\Renders\{
     HTMLRenderer,
     JSONRenderer
 };
