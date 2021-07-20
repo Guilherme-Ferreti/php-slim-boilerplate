@@ -18,7 +18,9 @@ When ready, install the dependencies by running the following command in your ap
 
 ```composer install```
 
-Rename <b>settings-example.php</b> to <b>settings.php</b> inside the config folder.
+Create a brand new *settings.php* inside the config folder by copying *settings-example.php*.
+
+```cp config/settings-example.php config/settings.php```
 
 Point your virtual host document root to application's public/ directory. 
 
@@ -26,7 +28,7 @@ If you are not using tools like WAMP or Apache, you may use PHP built-in server.
 
 ```php -S localhost:80 -t public```
 
-That's it. Now create an awsome application.
+That's it. Now create an awesome application.
 
 ## Features
 
@@ -59,3 +61,4 @@ This boilerplate comes with some features and basic folder structure. Feel free 
 Future additions to this project include:
 * Migrations
 * Better command line usage
+* Repository Pattern
