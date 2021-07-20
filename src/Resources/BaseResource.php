@@ -20,8 +20,6 @@ abstract class BaseResource
      */
     public static function collection(array $models) : array
     {
-        return array_map(function($model) {
-            return self::toArray($model);
-        }, $models);
+        return array_map(fn ($model) => self::toArray($model), $models);
     }
 }

@@ -4,7 +4,7 @@ This project provides a simple Model-View-Controller skeleton for quickly settin
 
 ## Requirements
 
-* PHP 7.3 or newer.
+* PHP 8.0.0 or newer.
 
 ## Installation
 
