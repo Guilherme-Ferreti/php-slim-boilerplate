@@ -4,6 +4,8 @@ namespace App\Models;
 
 abstract class BaseModel 
 {
+    protected array $attributes = [];
+
     public function __construct(array $attributes = [])
     {
         $this->setAttributes($attributes);
@@ -15,25 +17,31 @@ abstract class BaseModel
     public function setAttributes(array $attributes = [])
     {
         foreach ($attributes as $attribute => $value) {
-            $this->{'set' . $attribute}($value);
+            $this->{$attribute} = $value;
         }
     }
 
-    /**
-     * Case there is no getter or setter defined for the attribute.
-     */
-    public function __call($method, $args)
+    public function __set($name, $value)
     {
-        $operation = substr($method, 0, 3);
+        $method = 'set' . ucfirst($name) . 'Attribute';
+        
+        if (method_exists($this, $method)) {
+            $this->$method($value);
+        } else {
+            $this->attributes[$name] = $value;
+        }
+    }
 
-        $attribute = strtolower(substr($method, 3, strlen($method)));
+    public function __get($attribute)
+    {
+        $method = 'get' . ucfirst($attribute) . 'Attribute';
 
-        switch ($operation) {
-            case 'get':
-                return $this->{$attribute};
+        if (method_exists($this, $method)) {
+            return $this->$method();
+        }
 
-            case 'set':
-                $this->{$attribute} = $args[0];
+        if (isset($this->attributes[$attribute])) {
+            return $this->attributes[$attribute];
         }
     }
 
@@ -42,18 +50,24 @@ abstract class BaseModel
      * 
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
-        $keys = array_keys(get_object_vars($this));
+        return array_map(function ($attribute) {
+            if (is_subclass_of($attribute, Self::class)) {
+                $attribute = $attribute->toArray();
+            }
 
-        $hide = ['db'];
+            if (is_array($attribute)) {
+                $attribute = array_map(function ($item) {
+                    if (is_subclass_of($item, Self::class)) {
+                        $item = $item->toArray();
+                    }
 
-        foreach ($keys as $key) {
-            if (in_array($key, $hide)) continue;
-            
-            $attributes[$key] = $this->{'get' . $key}();
-        }
+                    return $item;
+                }, $attribute);
+            }
 
-        return $attributes;
+            return $attribute;
+        }, $this->attributes);
     }
 }
