@@ -40,7 +40,7 @@ require_once __DIR__ . '/middleware.php';
 require_once __DIR__ . '/route-cache.php';
 
 // Register routes
-require_once __DIR__ . '/../src/Routes/web.php';
-require_once __DIR__ . '/../src/Routes/api.php';
+require_once __DIR__ . '/../src/Http/Routes/web.php';
+require_once __DIR__ . '/../src/Http/Routes/api.php';
 
 return $app;

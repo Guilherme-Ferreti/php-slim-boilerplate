@@ -1,7 +1,7 @@
 <?php
 
-use App\Controllers\HomeController;
-use App\Middlewares\CsrfMiddleware;
+use App\Http\Controllers\HomeController;
+use App\Http\Middlewares\CsrfMiddleware;
 
 $app->get('/', new HomeController())->setName('home');
 

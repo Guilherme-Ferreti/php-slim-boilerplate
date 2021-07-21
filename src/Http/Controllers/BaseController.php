@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Http\Controllers;
 
 use App\Helpers\View\ViewMaker;
 use Psr\Http\Message\ResponseInterface as Response;

@@ -5,7 +5,7 @@
  * Middlewares added last are the first ones to be executed.
  */
 
-use App\Middlewares\SessionMiddleware;
+use App\Http\Middlewares\SessionMiddleware;
 use App\Exceptions\Renders\{
     HTMLRenderer,
     JSONRenderer

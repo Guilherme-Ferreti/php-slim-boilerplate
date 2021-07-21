@@ -21,15 +21,15 @@ abstract class BaseModel
         }
     }
 
-    public function __set($name, $value)
+    public function __set($attribute, $value)
     {
-        $method = 'set' . ucfirst($name) . 'Attribute';
+        $method = 'set' . ucfirst($attribute) . 'Attribute';
         
         if (method_exists($this, $method)) {
-            $this->$method($value);
-        } else {
-            $this->attributes[$name] = $value;
+            return $this->$method($value);
         }
+
+        return $this->attributes[$attribute] = $value;    
     }
 
     public function __get($attribute)
