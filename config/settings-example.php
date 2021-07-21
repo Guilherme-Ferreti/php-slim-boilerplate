@@ -30,7 +30,7 @@ function settings(string $keys)
     
         'views' => [
             'path'          => $root . '/resources/views/',
-            'cache_path'    => $root . '/cache/',
+            'cache_path'    => $root . '/cache/views/',
             'extension'     => '.html'
         ],
 
