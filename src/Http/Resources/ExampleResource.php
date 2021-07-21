@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Resources;
+namespace App\Http\Resources;
 
 class ExampleResource extends BaseResource
 {

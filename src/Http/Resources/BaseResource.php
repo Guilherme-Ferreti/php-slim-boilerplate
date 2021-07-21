@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Resources;
+namespace App\Http\Resources;
 
 /**
  * Resources keep the logic for parsing any model to an array.
