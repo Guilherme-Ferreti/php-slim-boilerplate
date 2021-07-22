@@ -27,11 +27,24 @@ session_start();
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// Create APP instance
-$app = Slim\Factory\AppFactory::create();
-
 // Load helper functions
 require_once __DIR__ . '/../src/Helpers/helpers.php';
+
+$containerBuilder = new \DI\ContainerBuilder();
+
+if (settings('app.environment') === 'production') {
+    $containerBuilder->enableCompilation(settings('container.cache.compilation_path'));
+    $containerBuilder->writeProxiesToFile(true, settings('container.cache.proxies_path'));
+}
+
+// Add container definitions
+$containerBuilder->addDefinitions(__DIR__ . '/container.php');
+
+// Build PHP-DI Container instance
+$container = $containerBuilder->build();
+
+// Create APP instance
+$app = DI\Bridge\Slim\Bridge::create($container);
 
 // Register middlewares
 require_once __DIR__ . '/middleware.php';
