@@ -19,6 +19,13 @@ function settings(string $keys)
             'timezone'      => 'America/Sao_Paulo',
             'domain'        => 'http://localhost',
         ],
+
+        'container' => [
+            'cache' => [
+                'compilation_path' => $root . '/cache/container/',
+                'proxies_path' => $root . '/cache/container/proxies/',
+            ],
+        ],
     
         'db' => [
             'connection'    => '',      // mysql, sqlsrv
