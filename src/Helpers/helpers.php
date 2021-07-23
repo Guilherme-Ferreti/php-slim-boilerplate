@@ -77,6 +77,11 @@ function logger(string $name = 'app')
     return $logger;
 }
 
+function report($exception): void
+{
+    logger()->error($exception);
+}
+
 /**
  * Return the URL for the given route.
  */
