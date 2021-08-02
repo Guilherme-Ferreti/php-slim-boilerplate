@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use App\Database\Database;
+
 abstract class BaseModel 
 {
+    use Database;
+    
     protected array $attributes = [];
 
     public function __construct(array $attributes = [])
@@ -14,11 +18,13 @@ abstract class BaseModel
     /**
      * Set all given attributes into the model.
      */
-    public function setAttributes(array $attributes = [])
+    public function setAttributes(array $attributes = []): self
     {
         foreach ($attributes as $attribute => $value) {
             $this->{$attribute} = $value;
         }
+
+        return $this;
     }
 
     public function __set($attribute, $value)

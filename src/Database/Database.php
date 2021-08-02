@@ -2,6 +2,8 @@
 
 namespace App\Database;
 
+use App\Database\Sql;
+
 Trait Database
 {
     protected $db;
@@ -13,16 +15,5 @@ Trait Database
         }
 
         return $this->db;
-    }
-    
-    public static function create($attributes)
-    {
-        $self = new self($attributes);
-
-        if (! $self->save()) {
-            return false;
-        }
-
-        return $self;
     }
 }
