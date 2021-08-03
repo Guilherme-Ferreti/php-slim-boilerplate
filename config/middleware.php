@@ -16,5 +16,5 @@ $app->addRoutingMiddleware();
 
 $app->add(new MethodOverrideMiddleware());
 
-$errorMiddleware = $app->addErrorMiddleware((settings('app.environment') === 'development'), true, true);
+$errorMiddleware = $app->addErrorMiddleware((settings('app.environment') === 'dev'), true, true);
 $errorMiddleware->setDefaultErrorHandler([new \App\Exceptions\Handler(), 'handle']);

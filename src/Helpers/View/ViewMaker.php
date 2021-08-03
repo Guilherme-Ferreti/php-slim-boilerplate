@@ -12,7 +12,7 @@ class ViewMaker
     {
         $pathToView = str_replace('.', '/', $pathToView);
 
-        $debug = (settings('app.environment') === 'development');
+        $debug = (settings('app.environment') === 'dev');
 
         $settings = [
             'cache' => path(settings('views.cache_path')),

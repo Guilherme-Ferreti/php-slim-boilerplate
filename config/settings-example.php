@@ -14,7 +14,7 @@ function settings(string $keys)
 
     $settings = array(
         'app' => [
-            'environment'   => 'development',
+            'environment'   => 'dev',
             'root'          => $root,
             'timezone'      => 'America/Sao_Paulo',
             'domain'        => 'http://localhost',
