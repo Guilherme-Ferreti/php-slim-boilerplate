@@ -6,8 +6,6 @@ use App\Database\Database;
 
 abstract class BaseModel 
 {
-    use Database;
-    
     protected array $attributes = [];
 
     public function __construct(array $attributes = [])

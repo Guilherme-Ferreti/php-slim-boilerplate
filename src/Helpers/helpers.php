@@ -1,6 +1,7 @@
 <?php
 
 use Monolog\Logger;
+use App\Database\Sql;
 use App\Helpers\Session;
 use Monolog\Handler\StreamHandler;
 use Psr\Http\Message\UploadedFileInterface;
@@ -270,4 +271,13 @@ function mimetype(string $path) : string
     ];
 
     return $mime_types[pathinfo($path, PATHINFO_EXTENSION)] ?? 'application/octet-stream';
+}
+
+function db(): Sql
+{
+    if (!isset($GLOBALS['db'])) {
+        $GLOBALS['db'] = new Sql();
+    }
+
+    return $GLOBALS['db'];
 }
