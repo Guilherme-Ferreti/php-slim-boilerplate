@@ -18,7 +18,7 @@ abstract class BaseModel
     /**
      * Set all given attributes into the model.
      */
-    public function setAttributes(array $attributes = []): self
+    public function setAttributes(array $attributes = [])
     {
         foreach ($attributes as $attribute => $value) {
             $this->{$attribute} = $value;
