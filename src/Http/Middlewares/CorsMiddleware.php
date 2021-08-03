@@ -16,7 +16,7 @@ class CorsMiddleware
         $methods = $routingResults->getAllowedMethods();
         $requestHeaders = $request->getHeaderLine('Access-Control-Request-Headers');
 
-        $origin = $request->getHeader('Origin')[0] ?? null;
+        $origin = $request->getHeader('Origin')[0] ?? '';
 
         if (in_array($origin, settings('cors.allowed_origins'))) {
             $response = $handler->handle($request);
