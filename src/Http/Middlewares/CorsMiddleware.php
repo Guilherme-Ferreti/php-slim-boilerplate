@@ -11,14 +11,9 @@ class CorsMiddleware
 {
     public function __invoke(Request $request, RequestHandler $handler) : Response
     {
-        $routeContext = RouteContext::fromRequest($request);
-        $routingResults = $routeContext->getRoutingResults();
-        $methods = $routingResults->getAllowedMethods();
-        $requestHeaders = $request->getHeaderLine('Access-Control-Request-Headers');
-
         $origin = $request->getHeader('Origin')[0] ?? '';
 
-        if (in_array($origin, settings('cors.allowed_origins'))) {
+        if ($this->originIsAllowed($origin)) {
             $response = $handler->handle($request);
         } else {
             $origin = settings('app.domain');
@@ -27,8 +22,17 @@ class CorsMiddleware
 
         return $response
             ->withHeader('Access-Control-Allow-Origin', $origin)
-            ->withHeader('Access-Control-Allow-Methods', implode(', ', $methods))
-            ->withHeader('Access-Control-Allow-Headers', $requestHeaders ?: '*')
+            ->withHeader('Access-Control-Allow-Methods', implode(', ', RouteContext::fromRequest($request)->getRoutingResults()->getAllowedMethods()))
+            ->withHeader('Access-Control-Allow-Headers', $request->getHeaderLine('Access-Control-Request-Headers') ?: '*')
             ->withHeader('Vary', 'Origin');
+    }
+
+    private function originIsAllowed($origin): bool 
+    {
+        if (settings('app.environment') === 'dev') {
+            return true;
+        }
+
+        return in_array($origin, settings('cors.allowed_origins'));
     }
 }
