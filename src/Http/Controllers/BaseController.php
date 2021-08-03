@@ -40,7 +40,17 @@ abstract class BaseController
 
     protected function redirect(Response $response, string $routeName, array $data = [], array $queryParams = [], int $status = 200)
     {
-        return $response->withHeader('location', url_for($routeName, $data, $queryParams))
-                        ->withStatus($status);
+        return $response
+                ->withHeader('location', url_for($routeName, $data, $queryParams))
+                ->withStatus($status);
+    }
+
+    protected function json(Response $response, array $payload = [], int $status = 200): Response
+    {
+        $response->getBody()->write(json_encode($payload));
+
+        return $response
+                ->withHeader('Content-Type', 'application/json')
+                ->withStatus($status);
     }
 }
