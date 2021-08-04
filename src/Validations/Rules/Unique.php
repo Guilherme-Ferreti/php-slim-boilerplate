@@ -6,7 +6,7 @@ use Rakit\Validation\Rule;
 
 class Unique extends Rule
 {
-    protected $message = "O valor para o campo :attribute já está cadastrado.";
+    protected $message = "The value for the field :attribute is already registered.";
     protected $fillableParams = ['table', 'column', 'except_id'];
     protected $requiredParams = ['table', 'column'];
 

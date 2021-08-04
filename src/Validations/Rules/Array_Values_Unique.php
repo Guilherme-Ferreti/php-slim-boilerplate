@@ -6,7 +6,7 @@ use Rakit\Validation\Rule;
 
 class Array_Values_Unique extends Rule
 {
-    protected $message = "O campo :attribute deve conter valores únicos.";
+    protected $message = "The field :attribute must contain only unique values.";
 
     public function check($array) : bool
     {
