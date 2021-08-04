@@ -6,7 +6,7 @@ use Rakit\Validation\Rule;
 
 class Exists extends Rule
 {
-    protected $message = "The value for the field :attribute does not exist.";
+    protected $message = "The value for the field :attribute was not found.";
     protected $fillableParams = ['table', 'column'];
     protected $requiredParams = ['table', 'column'];
 
