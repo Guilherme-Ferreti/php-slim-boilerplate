@@ -7,7 +7,6 @@ use Slim\Psr7\Response;
 use App\Helpers\View\ViewMaker;
 use Slim\Exception\HttpNotFoundException;
 use Psr\Http\Message\ServerRequestInterface;
-use Slim\Exception\HttpException;
 
 abstract class ExceptionHandler
 {
@@ -30,7 +29,6 @@ abstract class ExceptionHandler
         $this->setResponse('default', function () {
             if ($this->wantsJson()) {
                 return $this->json([
-                    'error' => true,
                     'message' => $this->exception->getMessage(),
                     'code' => $this->exception->getCode(),
                     'time' => now(),
@@ -98,11 +96,9 @@ abstract class ExceptionHandler
 
     protected function getStatusCode(): int
     {
-        if ($this->exception instanceof HttpException) {
-            return $this->exception->getCode();
-        }
-
-        return 500;
+        return is_http_status_code($this->exception->getCode()) 
+            ? $this->exception->getCode()
+            : 500;
     }
 
     protected function shouldReport($exception): bool
