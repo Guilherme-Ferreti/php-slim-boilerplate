@@ -2,8 +2,10 @@
 
 namespace App\Validations;
 
-use Rakit\Validation\Validator; // For more information on how to use this class please see https://github.com/rakit/validation
 use Rakit\Validation\ErrorBag;
+use App\Exceptions\ValidationException;
+use App\Models\BaseModel;
+use Rakit\Validation\Validator; // For more information on how to use this class please see https://github.com/rakit/validation
 
 abstract class BaseValidator
 {
@@ -15,13 +17,24 @@ abstract class BaseValidator
     /** Model to be used for the validation rules */
     protected $model;
 
-    public function __construct(array $inputs, $model = null)
+    /** 
+     * Model that should be ignored whe validating.
+    */
+    public function ignore(BaseModel $model): self
     {
         $this->model = $model;
 
+        return $this;
+    }
+
+    /**
+     * Run the validation.
+     */
+    public function validate(array $inputs): array
+    {
         $validator = new Validator();
 
-        $this->addCustomValidators($validator);
+        $this->addCustomRules($validator);
 
         $this->validation = $validator->make($this->sanitize($inputs), $this->rules());
 
@@ -29,12 +42,18 @@ abstract class BaseValidator
         $this->validation->setMessages($this->messages());
 
         $this->validation->validate();
+
+        if ($this->validation->fails()) {
+            throw new ValidationException($this);
+        }
+
+        return $this->validation->getValidData();
     }
 
     /**
      * Adds custom validation rules to the validator object.
      */
-    protected function addCustomValidators(Validator $validator)
+    protected function addCustomRules(Validator $validator)
     {
         $files = scandir(self::RULES_DIRECTORY);
 
@@ -52,57 +71,25 @@ abstract class BaseValidator
     }
     
     /**
-     * Returns if the validation has failed.
-     */
-    public function fails() : bool
-    {
-        return $this->validation->fails();
-    }
-    
-    /**
      * Set error bag and validated data into flash session.
      */
-    public function handleFailure() : void
+    public function flashErrorBagAndValidatedInputs(): void
     {
-        flash(['errorBag' => $this->errors()] + $this->getValidatedData());
+        flash(['errorBag' => $this->errors()] + $this->validation->getValidatedData());
     }
 
     /** 
      * Returns Rakit ErrorBag containing the validation errors.
     */
-    public function errors() : ErrorBag
+    public function errors(): ErrorBag
     {
         return $this->validation->errors();
     }
 
     /**
-     * Retrivies data that was successfully validated.
-     */
-    public function getValidData() : array
-    {
-        return $this->validation->getValidData();
-    }
-
-    /**
-     * Retrieves data that went through validation.
-     */
-    public function getValidatedData() : array
-    {
-        return $this->validation->getValidatedData();
-    }
-
-    /**
-     * Retrieves data that was not validated.
-     */
-    public function getInvalidData() : array
-    {
-        return $this->validation->getInvalidData();
-    }
-
-    /**
      * Treats data before validation.
      */
-    protected function sanitize(array $inputs) : array
+    protected function sanitize(array $inputs): array
     {
         return $inputs;
     }
@@ -110,7 +97,7 @@ abstract class BaseValidator
     /** 
      * Aliases to inputs being validated.
      */
-    protected function aliases() : array
+    protected function aliases(): array
     {
         return [];
     }
@@ -118,7 +105,7 @@ abstract class BaseValidator
     /**
      * Messages to be used for validation errors.
      */
-    protected function messages() : array 
+    protected function messages(): array 
     {
         return [];
     }
@@ -126,5 +113,5 @@ abstract class BaseValidator
     /**
      * Rules to be used for validation.
      */
-    abstract protected function rules() : array;
+    abstract protected function rules(): array;
 }

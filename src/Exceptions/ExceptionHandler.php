@@ -15,7 +15,8 @@ abstract class ExceptionHandler
     protected array $responses;
 
     protected array $dontReportDefaults = [
-        HttpNotFoundException::class, 
+        HttpNotFoundException::class,
+        ValidationException::class,
     ];
 
     public function __construct()
@@ -36,6 +37,21 @@ abstract class ExceptionHandler
             }
 
             return $this->view('site.errors.generic');
+        });
+
+        $this->setResponse(ValidationException::class, function () {
+            if ($this->wantsJson()) {
+                return $this->json([
+                    'message' => $this->exception->getMessage(),
+                    'code' => $this->exception->getCode(),
+                    'errors' => $this->exception->validator->errors()->firstOfAll(),
+                    'time' => now(),
+                ]);
+            }
+
+            $this->exception->validator->flashErrorBagAndValidatedInputs();
+
+            return $this->redirect('previous_route');
         });
     }
 
