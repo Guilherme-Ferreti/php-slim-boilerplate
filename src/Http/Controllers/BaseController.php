@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\View\ViewMaker;
-use Psr\Http\Message\ResponseInterface as Response;
+use Slim\Psr7\Response;
 
 abstract class BaseController
 {
     const POLICIES_NAMESPACE = '\App\Policies\\';
 
-    protected function authorize(string $action, $model, $user = null) : bool
+    protected function authorize(string $action, $model, $user = null): bool
     {
         if (! $user) {
             // Grab authenticated user
@@ -33,20 +33,22 @@ abstract class BaseController
         return $policy->$action($user, $model);
     }
 
-    protected function view(Response $response, string $pathToView, array $variables = [])
+    protected function view(string $pathToView, array $variables = []): Response
     {
-        return ViewMaker::make($pathToView, $variables, $response);
+        return ViewMaker::make($pathToView, $variables, new Response());
     }
 
-    protected function redirect(Response $response, string $routeName, array $data = [], array $queryParams = [], int $status = 200)
+    protected function redirect(string $routeName, array $data = [], array $queryParams = [], int $status = 200): Response
     {
-        return $response
+        return (new Response())
                 ->withHeader('location', url_for($routeName, $data, $queryParams))
                 ->withStatus($status);
     }
 
-    protected function json(Response $response, array $payload = [], int $status = 200): Response
+    protected function json(array $payload = [], int $status = 200): Response
     {
+        $response = new Response();
+
         $response->getBody()->write(json_encode($payload));
 
         return $response

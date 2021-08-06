@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Psr\Http\Message\ResponseInterface as Response;
-
 class HomeController extends BaseController
 {
-    public function __invoke(Response $response)
+    public function __invoke()
     {
-        return $this->view($response, 'site.index', ['title' => 'Homepage! Welcome']);
+        return $this->view('site.index', ['title' => 'Homepage! Welcome']);
     }
 }
