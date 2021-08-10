@@ -74,4 +74,13 @@ abstract class BaseModel
             return $attribute;
         }, $this->attributes);
     }
+    
+    public function load(...$relations): self
+    {
+        foreach ($relations as $relation) {
+            $this->{'load' . ucwords($relation)}();
+        }
+
+        return $this;
+    }
 }
