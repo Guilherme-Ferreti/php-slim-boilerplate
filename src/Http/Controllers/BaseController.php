@@ -2,35 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\View\ViewMaker;
 use Slim\Psr7\Response;
+use App\Models\BaseModel;
+use App\Helpers\View\ViewMaker;
 
 abstract class BaseController
 {
     const POLICIES_NAMESPACE = '\App\Policies\\';
 
-    protected function authorize(string $action, $model, $user = null): bool
+    protected function authorize(string $action, string|BaseModel $model, $user = null): bool
     {
-        if (! $user) {
-            // Grab authenticated user
-            // $user = auth_user();
-        }
+        $model_class = is_string($model) ? $model : get_class($model);
 
-        if (is_string($model)) {
-            $model = "\App\Models\\$model";
+        $model_class = str_replace('\\', '', strrchr($model_class, '\\'));
 
-            $modelname = str_replace('\\', '', strrchr($model, '\\'));
-        }
+        $policy_class = self::POLICIES_NAMESPACE . $model_class . 'Policy';
 
-        if (is_object($model)) {
-            $modelname = get_class($model);
-        }
+        $policy = new $policy_class();
 
-        $classname = self::POLICIES_NAMESPACE . $modelname . 'Policy';
-
-        $policy = new $classname();
-
-        return $policy->$action($user, $model);
+        return $policy->$action($user ?? auth_user(), $model);
     }
 
     protected function view(string $pathToView, array $variables = []): Response
