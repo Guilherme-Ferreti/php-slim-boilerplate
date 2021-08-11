@@ -282,7 +282,7 @@ function db(): Sql
     return $GLOBALS['db'];
 }
 
-function is_http_status_code(int $code): bool
+function is_http_status_code(int|string $code): bool
 {
     $http_codes = [
         100 => 'Continue',
