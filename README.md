@@ -56,6 +56,7 @@ This boilerplate comes with some features and basic folder structure. Feel free 
 ```composer generate-keys```
 
 • Clear application cache: 
+
 ```composer cache-clear``` 
 
 • Remove dev dependencies and optimize composer's autoloader (deployment only):
@@ -65,5 +66,4 @@ This boilerplate comes with some features and basic folder structure. Feel free 
 ## RoadMap
 Future additions to this project include:
 * Migrations
-* Better command line usage
 * Repository Pattern
