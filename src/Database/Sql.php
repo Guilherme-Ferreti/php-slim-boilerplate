@@ -9,6 +9,8 @@ use PDO;
  */
 class Sql 
 {
+    private $shouldLogQueries; 
+
     /**
      * PDO connection instance.
      */
@@ -30,6 +32,8 @@ class Sql
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         ]);
+
+        $this->shouldLogQueries = settings('app.environment') === 'dev';
     }
 
     /**
@@ -41,6 +45,8 @@ class Sql
      */
     public function select(string $rawQuery, array $parameters = [])
     {
+        $this->logQuery($rawQuery);
+
         $statement = $this->connection->prepare($rawQuery);
     
         $result = $statement->execute($parameters);
@@ -57,6 +63,8 @@ class Sql
      */
     public function query(string $rawQuery, array $parameters = [])
     {
+        $this->logQuery($rawQuery);
+        
         $statement = $this->connection->prepare($rawQuery);
 
         return $statement->execute($parameters);
@@ -94,5 +102,20 @@ class Sql
     public function rollback()
     {
         $this->connection->rollback();
+    }
+
+    private function logQuery(string $query): void
+    {
+        if ($this->shouldLogQueries) {
+            logger('queries')->debug(trim(preg_replace('/\s+/', ' ', $query)));
+        }
+    }
+
+    
+    public function __destruct()
+    {
+        if ($this->shouldLogQueries) {
+            logger('queries')->debug('----------------------------------------------------------------');
+        }
     }
 }
