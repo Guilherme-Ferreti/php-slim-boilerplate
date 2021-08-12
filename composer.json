@@ -25,5 +25,18 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9"
+    },
+    "scripts": {
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php -S localhost:80 -t public"
+        ],
+        "generate-keys": "@php src/Helpers/Cryptography/generate-keys.php",
+        "cache-clear": "rm -rf cache/*"
+    },
+    "scripts-descriptions": {
+        "serve": "Serves application using php built-in server",
+        "generate-keys": "Generates application encryption keys",
+        "cache-clear": "Clears application cache"
     }
 }

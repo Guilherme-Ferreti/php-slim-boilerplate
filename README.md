@@ -24,9 +24,11 @@ Create a brand new *settings.php* inside the config folder by copying *settings-
 
 Point your virtual host document root to application's public/ directory. 
 
-If you are not using tools like WAMP or Apache, you may use PHP built-in server.
+If you are not using tools like WAMP or Apache, you may use PHP built-in server, or our pre-defined composer script.
 
 ```php -S localhost:80 -t public```
+
+```composer serve```
 
 That's it. Now create an awesome application.
 
@@ -51,7 +53,10 @@ This boilerplate comes with some features and basic folder structure. Feel free 
 
 • To generate encryption keys, run the following command from the root of your project:
 
-```php src/Helpers/Cryptography/generate-keys.php```
+```composer generate-keys```
+
+• Clear application cache: 
+```composer cache-clear``` 
 
 • Remove dev dependencies and optimize composer's autoloader (deployment only):
 
